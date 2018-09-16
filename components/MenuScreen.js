@@ -43,14 +43,13 @@ export default class MenuScreen extends React.Component {
 
 const styles = StyleSheet.create({
     MenuScreen: {
-      marginTop: 0,
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
     MenuScreen2: {
-        marginTop: 225,
+        marginTop: 150,
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',

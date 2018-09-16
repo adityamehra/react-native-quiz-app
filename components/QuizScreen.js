@@ -65,7 +65,7 @@ export default class QuizScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.QuizScreen}>
+      <View style = {styles.QuizScreen}>
         {
           this.state.quiz.length === 0 ? 
             (
@@ -75,18 +75,21 @@ export default class QuizScreen extends React.Component {
             )
             :
             (
-              <View style={styles.QuizScreen2}>
-                <Text style={{justifyContent:'center'}}> 
+              <View style = {styles.QuizScreen2}>
+                <Text style = {styles.Box}>
                   {this.state.counter + 1 + " / " + this.state.quiz.length}
                 </Text>
-                <Text style={{justifyContent:'center'}}> 
+                <Text style = {styles.Box}>
                   {"Score " + this.state.score}
                 </Text>
-                <Question question={this.state.quiz[this.state.counter].question}/>
-                <Options 
+                <Question
+                  // style = {styles.Question}
+                  question = {this.state.quiz[this.state.counter].question}
+                />
+                <Options
                   checkAnswer = {this.checkAnswer}
-                  correct={this.state.quiz[this.state.counter].correct_answer} 
-                  incorrect={this.state.quiz[this.state.counter].incorrect_answers} 
+                  correct = {this.state.quiz[this.state.counter].correct_answer} 
+                  incorrect = {this.state.quiz[this.state.counter].incorrect_answers} 
                 />
               </View>
             )
@@ -98,18 +101,28 @@ export default class QuizScreen extends React.Component {
 
 const styles = StyleSheet.create({
   QuizScreen: {
-    marginTop: 0,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   QuizScreen2: {
-    marginTop: 150,
-    paddingTop: 50,
+    marginTop: 125,
+    paddingTop: 75,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  Question: {
+    marginBottom: 10
+  },
+  Box: {
+    justifyContent:'center',
+    padding: 5,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#000',
+    marginBottom: 10
+  }
 });
