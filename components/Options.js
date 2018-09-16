@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, Button, ActivityIndicator } from 'react-native';
+import { View, FlatList, Button, ActivityIndicator, StyleSheet } from 'react-native';
 import { shuffle } from '../utils/Utils.js';
 
 export default class Options extends React.Component {
@@ -50,7 +50,7 @@ export default class Options extends React.Component {
                     <FlatList
                         data={this.state.options}
                         renderItem={({item}) => (
-                            <View>
+                            <View style={styles.OptionButton}>
                                 <Button
                                     onPress={(event) => { this.props.checkAnswer(event, item.key, this.state.correct) }}
                                     title={item.key}
@@ -66,3 +66,9 @@ export default class Options extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    OptionButton: {
+        margin: 5
+    }
+})

@@ -28,12 +28,16 @@ export default class MenuScreen extends React.Component {
                 <View style={styles.MenuScreen2}>
                     <FlatList
                         data={this.state.topics}
-                        renderItem={({item}) => <Button
-                            onPress={() => {this._handleNextPress(item.key)}}
-                            title={item.key}
-                            color="#C0C0C0"
-                            accessibilityLabel="Learn more about this purple button"
-                        />}
+                        renderItem={({item}) => (
+                            <View style={styles.CategoryButton}>
+                                <Button
+                                    onPress={() => {this._handleNextPress(item.key)}}
+                                    title={item.key}
+                                    color="#C0C0C0"
+                                    accessibilityLabel="Learn more about this purple button"
+                                />
+                            </View>
+                        )}
                     />
                 </View>
             </View>
@@ -55,5 +59,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+    CategoryButton: {
+        margin: 5
+    }
   });
   
