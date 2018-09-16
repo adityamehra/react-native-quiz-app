@@ -8,9 +8,12 @@ export default class MenuScreen extends React.Component {
         topics: [{key:'books'}, {key:'sports'}, {key:'animals'}]
     }
 
-    _handleNextPress(url) {
-        this.nextRoute.passProps.url = url
-        this.props.navigator.push(this.nextRoute);
+    _handleNextPress(category) {
+        this.nextRoute.passProps.url = category
+        // this.props.navigator.push(this.nextRoute);
+        this.props.navigation.navigate('Quiz', {
+            url: category
+        })
     }
 
     nextRoute = {
@@ -22,15 +25,17 @@ export default class MenuScreen extends React.Component {
     render() {
         return (
             <View style={styles.MenuScreen}>
-                <FlatList
-                    data={this.state.topics}
-                    renderItem={({item}) => <Button
-                        onPress={() => {this._handleNextPress(item.key)}}
-                        title={item.key}
-                        color="#C0C0C0"
-                        accessibilityLabel="Learn more about this purple button"
-                    />}
-                />
+                <View style={styles.MenuScreen2}>
+                    <FlatList
+                        data={this.state.topics}
+                        renderItem={({item}) => <Button
+                            onPress={() => {this._handleNextPress(item.key)}}
+                            title={item.key}
+                            color="#C0C0C0"
+                            accessibilityLabel="Learn more about this purple button"
+                        />}
+                    />
+                </View>
             </View>
         )
     }
@@ -38,11 +43,18 @@ export default class MenuScreen extends React.Component {
 
 const styles = StyleSheet.create({
     MenuScreen: {
-      marginTop: 225,
+      marginTop: 0,
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
+    MenuScreen2: {
+        marginTop: 225,
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
   });
   

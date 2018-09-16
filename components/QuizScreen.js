@@ -19,10 +19,11 @@ export default class QuizScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Hello Hello " + this.props.url)
+    const { navigation } = this.props;
+    const url = navigation.getParam('url', 'sports')
 
     this.setState((prevState) => {
-      return {url: prevState.urls[this.props.url]}
+      return {url: prevState.urls[url]}
     }, () => {
       fetch(this.state.url).then(response => {
         return response.json()
@@ -74,11 +75,11 @@ export default class QuizScreen extends React.Component {
             )
             :
             (
-              <View>
-                <Text style={{justifyContent: 'center'}}> 
+              <View style={styles.QuizScreen2}>
+                <Text style={{justifyContent:'center'}}> 
                   {this.state.counter + 1 + " / " + this.state.quiz.length}
                 </Text>
-                <Text style={{justifyContent: 'center'}}> 
+                <Text style={{justifyContent:'center'}}> 
                   {"Score " + this.state.score}
                 </Text>
                 <Question question={this.state.quiz[this.state.counter].question}/>
@@ -97,7 +98,15 @@ export default class QuizScreen extends React.Component {
 
 const styles = StyleSheet.create({
   QuizScreen: {
-    marginTop: 225,
+    marginTop: 0,
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  QuizScreen2: {
+    marginTop: 150,
+    paddingTop: 50,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',

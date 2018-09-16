@@ -11,13 +11,10 @@ export default class Options extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount")
         this.stateManagement()
     }
 
     componentDidUpdate(prevProps){
-        console.log("componentDidUpdate")
-        console.log(prevProps)
         if (prevProps.correct !== this.props.correct) {
             this.stateManagement()
         }
@@ -34,9 +31,6 @@ export default class Options extends React.Component {
         this.setState({
             correct: this.props.correct,
             options:[..._options]
-        }, () => {
-            console.log("stateManagement")
-            console.log(this.state.options)
         })
     }
 
@@ -64,7 +58,6 @@ export default class Options extends React.Component {
                                 />
                             </View>
                         )}
-                        // keyExtractor={item => item.id}
                     />
                 </View>
                 )
