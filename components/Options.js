@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, Button, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { shuffle } from '../utils/Utils.js';
 
 export default class Options extends React.Component {
@@ -36,7 +36,7 @@ export default class Options extends React.Component {
 
     render() {
         return (
-            <View >
+            <View style={styles.container}>
             {
             this.state.options.length === 0 ? 
                 (
@@ -51,11 +51,13 @@ export default class Options extends React.Component {
                         data={this.state.options}
                         renderItem={({item}) => (
                             <View style={styles.OptionButton}>
-                                <Button
-                                    onPress={(event) => { this.props.checkAnswer(event, item.key, this.state.correct) }}
-                                    title={item.key}
-                                    color="#C0C0C0"
-                                />
+                                <TouchableOpacity 
+                                    style={styles.Category} 
+                                    onPress={(event) => { this.props.checkAnswer(event, item.key, this.state.correct) }}>
+                                        <View style={{alignItems: 'center'}}>
+                                            <Text>{item.key}</Text>
+                                        </View>
+                                </TouchableOpacity>
                             </View>
                         )}
                     />
@@ -68,7 +70,18 @@ export default class Options extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 6,
+    },
     OptionButton: {
         margin: 5
-    }
+    },
+    Category: {
+        height: 40,
+        margin: 2,
+        justifyContent: 'center',
+        borderRadius: 18,
+        borderWidth: 2,
+        borderColor: '#000'
+    }  
 })

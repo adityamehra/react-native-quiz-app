@@ -16,17 +16,7 @@ const Navigation = createStackNavigator(
 export default class App extends React.Component {
   render() {
     return (
-      <Navigation style={styles.MenuScreen}/>
+      <Navigation />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  MenuScreen: {
-    marginTop: 100,
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

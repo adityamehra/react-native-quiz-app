@@ -1,16 +1,22 @@
 import React from 'react'
-import { View, FlatList, Button, StyleSheet } from 'react-native'
+import { View, FlatList, Button, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import QuizScreen from './QuizScreen.js'
 
 export default class MenuScreen extends React.Component {
 
     state = {
-        topics: [{key:'books'}, {key:'sports'}, {key:'animals'}]
+        topics: [
+            {key:'books'},
+            {key:'sports'},
+            {key:'animals'},
+            {key:'<TBD 1>'},
+            {key:'<TBD 2>'},
+            {key:'<TBD 3>'}
+        ]
     }
 
     _handleNextPress(category) {
         this.nextRoute.passProps.url = category
-        // this.props.navigator.push(this.nextRoute);
         this.props.navigation.navigate('Quiz', {
             url: category
         })
@@ -24,22 +30,21 @@ export default class MenuScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.MenuScreen}>
-                <View style={styles.MenuScreen2}>
-                    <FlatList
+            <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
+                <FlatList
                         data={this.state.topics}
                         renderItem={({item}) => (
-                            <View style={styles.CategoryButton}>
-                                <Button
-                                    onPress={() => {this._handleNextPress(item.key)}}
-                                    title={item.key}
-                                    color="#C0C0C0"
-                                    accessibilityLabel="Learn more about this purple button"
-                                />
+                            <View>
+                                <TouchableOpacity 
+                                    style={styles.Category} 
+                                    onPress={() => {this._handleNextPress(item.key)}}>
+                                        <View style={{alignItems: 'center'}}>
+                                            <Text>{item.key}</Text>
+                                        </View>
+                                </TouchableOpacity>
                             </View>
                         )}
                     />
-                </View>
             </View>
         )
     }
@@ -59,8 +64,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
-    CategoryButton: {
-        margin: 5
-    }
+    Category: {
+        height: 100,
+        margin: 2,
+        justifyContent: 'center',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#000'
+    }                                    
   });
   
