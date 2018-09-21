@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { shuffle } from '../utils/Utils.js';
+import decode from '../utils/Unescape.js';
 
 export default class Options extends React.Component {
 
@@ -55,7 +56,7 @@ export default class Options extends React.Component {
                                     style={styles.Category} 
                                     onPress={(event) => { this.props.checkAnswer(event, item.key, this.state.correct) }}>
                                         <View style={{alignItems: 'center'}}>
-                                            <Text>{item.key}</Text>
+                                            <Text>{decode(item.key)}</Text>
                                         </View>
                                 </TouchableOpacity>
                             </View>
@@ -82,6 +83,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 18,
         borderWidth: 2,
-        borderColor: '#000'
+        borderColor: '#FBC02D'
     }  
 })

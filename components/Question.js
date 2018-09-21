@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import decode from '../utils/Unescape.js';
 
 export default class Question extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.Question}>
-            {this.props.question}
+            {console.log(decode.chars)}
+            {decode(this.props.question)}
         </Text>
       </View>
     );

@@ -9,9 +9,9 @@ export default class MenuScreen extends React.Component {
             {key:'books'},
             {key:'sports'},
             {key:'animals'},
-            {key:'<TBD 1>'},
-            {key:'<TBD 2>'},
-            {key:'<TBD 3>'}
+            {key:'history'},
+            {key:'television'},
+            {key:'geography'}
         ]
     }
 
@@ -30,21 +30,20 @@ export default class MenuScreen extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
-                <FlatList
-                        data={this.state.topics}
-                        renderItem={({item}) => (
-                            <View>
-                                <TouchableOpacity 
-                                    style={styles.Category} 
-                                    onPress={() => {this._handleNextPress(item.key)}}>
-                                        <View style={{alignItems: 'center'}}>
-                                            <Text>{item.key}</Text>
-                                        </View>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-                    />
+            <View style={styles.MenuScreen}>
+                {this.state.topics.map(item => {
+                    return (
+                        <View style={styles.CategoryContainer}>
+                            <TouchableOpacity 
+                                style={styles.Category} 
+                                onPress={() => {this._handleNextPress(item.key)}}>
+                                    <View style={{alignItems: 'center'}}>
+                                        <Text>{item.key}</Text>
+                                    </View>
+                            </TouchableOpacity>
+                        </View>
+                    )
+                })}
             </View>
         )
     }
@@ -52,25 +51,31 @@ export default class MenuScreen extends React.Component {
 
 const styles = StyleSheet.create({
     MenuScreen: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    MenuScreen2: {
-        marginTop: 150,
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        backgroundColor: '#1B5C60',
+        // borderWidth: 1,
+        // borderColor: 'red',
+        padding: 10
+    },
+    CategoryContainer: {
+        width: '50%',
+        height: '25%',
+        // borderWidth: 1,
+        // borderColor: '#000',
         justifyContent: 'center',
-      },
+        alignItems:'center'
+    },
     Category: {
-        height: 100,
+        height: 125,
+        width: 125,
         margin: 2,
         justifyContent: 'center',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#000'
+        borderRadius: 62.5,
+        // borderWidth: 2,
+        // borderColor: '#FBC02D',
+        backgroundColor: '#E5736B'
     }                                    
   });
   

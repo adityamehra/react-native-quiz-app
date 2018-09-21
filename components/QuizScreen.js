@@ -13,7 +13,10 @@ export default class QuizScreen extends React.Component {
     urls: {
       sports: 'https://opentdb.com/api.php?amount=20&category=21&type=multiple',
       books: 'https://opentdb.com/api.php?amount=30&category=10&difficulty=medium&type=multiple',
-      animals: 'https://opentdb.com/api.php?amount=15&category=27&difficulty=medium&type=multiple'
+      animals: 'https://opentdb.com/api.php?amount=15&category=27&difficulty=medium&type=multiple',
+      history: 'https://opentdb.com/api.php?amount=30&category=23&difficulty=medium&type=multiple',
+      television: 'https://opentdb.com/api.php?amount=30&category=14&difficulty=medium&type=multiple',
+      geography: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple'
     },
     category: 'books',
     score: 0
@@ -146,6 +149,7 @@ const styles = StyleSheet.create({
     // borderColor: '#000',
     flex: 5,
     margin: 10,
+    marginTop: 0,
     backgroundColor: '#FFFDE7',
     flexDirection: 'row',
     color: '#444444'
@@ -166,10 +170,11 @@ const styles = StyleSheet.create({
     // borderRadius: 2,
     // borderColor: "#000",
     // elevation: 1,
-    flex: 1,
+    flex: 0.8,
     flexDirection: 'row',
     width: 200,
-    margin: 10
+    margin: 10,
+    marginBottom: 5
   },
   Box: {
     textAlign:'center',
@@ -194,8 +199,7 @@ const styles = StyleSheet.create({
   },
   CategoryBox: {
     textAlign:'center',
-    alignItems: 'center',
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 18,
     borderColor: '#FBC02D',
     padding: 2,
