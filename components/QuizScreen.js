@@ -17,7 +17,10 @@ export default class QuizScreen extends React.Component {
       animals: 'https://opentdb.com/api.php?amount=15&category=27&difficulty=medium&type=multiple',
       history: 'https://opentdb.com/api.php?amount=30&category=23&difficulty=medium&type=multiple',
       television: 'https://opentdb.com/api.php?amount=30&category=14&difficulty=medium&type=multiple',
-      geography: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple'
+      geography: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple',
+      music: 'https://opentdb.com/api.php?amount=30&category=12&difficulty=medium&type=multiple',
+      art: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple',
+      mythology: 'https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple'
     },
     category: 'books',
     score: 0,

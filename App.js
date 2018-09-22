@@ -6,7 +6,12 @@ import { createStackNavigator } from 'react-navigation'
 
 const Navigation = createStackNavigator(
   {
-    Menu: { screen: MenuScreen },
+    Menu: { 
+      screen: MenuScreen,
+      navigationOptions: () => ({
+        title: `Select a category`
+      }), 
+    },
     Quiz: { screen: QuizScreen },
   },
   {

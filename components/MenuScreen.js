@@ -1,6 +1,8 @@
 import React from 'react'
-import { View, FlatList, Button, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import { View, Image, Button, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import QuizScreen from './QuizScreen.js'
+import { LinearGradient } from 'expo';
+import images from '../utils/Images.js'
 
 export default class MenuScreen extends React.Component {
 
@@ -10,8 +12,10 @@ export default class MenuScreen extends React.Component {
             {key:'sports'},
             {key:'animals'},
             {key:'history'},
-            {key:'television'},
-            {key:'geography'}
+            {key:'tv'},
+            {key:'geography'},
+            {key: 'mythology'},
+            {key: 'music'},
         ]
     }
 
@@ -30,6 +34,19 @@ export default class MenuScreen extends React.Component {
 
     render() {
         return (
+            <LinearGradient
+                colors={['#3BBED7', '#30DACC', '#2EECCA']}
+                start={[0.1, 0.1]}
+                // end={[1, 1]}
+                style={{
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    marginTop: 65,
+                    height:'100%',
+                }}
+            >
             <View style={styles.MenuScreen}>
                 {this.state.topics.map(item => {
                     return (
@@ -38,13 +55,19 @@ export default class MenuScreen extends React.Component {
                                 style={styles.Category} 
                                 onPress={() => {this._handleNextPress(item.key)}}>
                                     <View style={{alignItems: 'center'}}>
-                                        <Text>{item.key}</Text>
+                                        <Image stlye={{height: '100%', width: '100%'}} source={images[item.key]} />
                                     </View>
                             </TouchableOpacity>
+                            <View style={{alignItems: 'center', padding: 5, color: '#FFF', fontSize: 14, fontWeight: 'bold'}}>
+                                <Text style={{color: '#FFFDE7', fontSize: 14, fontWeight: 'bold'}}>
+                                    {item.key}
+                                </Text>
+                            </View>
                         </View>
                     )
                 })}
             </View>
+            </LinearGradient>
         )
     }
 }
@@ -54,13 +77,14 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        backgroundColor: '#1B5C60',
+        // backgroundColor: '#39C5D6',
         // borderWidth: 1,
-        // borderColor: 'red',
-        padding: 10
+        // borderColor: 'green',
+        padding: 10,
+        marginTop: 0
     },
     CategoryContainer: {
-        width: '50%',
+        width: '33.33%',
         height: '25%',
         // borderWidth: 1,
         // borderColor: '#000',
@@ -68,14 +92,19 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     Category: {
-        height: 125,
-        width: 125,
+        height: 62.5,
+        width: 62.5,
         margin: 2,
         justifyContent: 'center',
-        borderRadius: 62.5,
+        borderRadius: 15,
         // borderWidth: 2,
         // borderColor: '#FBC02D',
-        backgroundColor: '#E5736B'
+        // backgroundColor: '#FFFFFF',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 1,
     }                                    
   });
   
