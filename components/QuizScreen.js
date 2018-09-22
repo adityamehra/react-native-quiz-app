@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
 import Question from './Question.js';
 import Options from './Options.js'
 import { shuffle } from '../utils/Utils.js';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class QuizScreen extends React.Component {
 
@@ -19,7 +20,8 @@ export default class QuizScreen extends React.Component {
       geography: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple'
     },
     category: 'books',
-    score: 0
+    score: 0,
+    showNext: true
   }
 
   componentDidMount() {
@@ -34,7 +36,6 @@ export default class QuizScreen extends React.Component {
         return response.json()
       }).then(response => {
         let _quiz = response.results
-        // console.log(_quiz)
         _quiz = shuffle(_quiz)
         this.setState({
           quiz: _quiz
@@ -45,12 +46,8 @@ export default class QuizScreen extends React.Component {
     })
   }
 
-  checkAnswer = (event, answer, correct_answer) => {
-    if (answer === correct_answer) {
-        Alert.alert(correct_answer)
-        this.incremenetScore()
-    }
-    this.incremenetCounter()
+  updateState = () => {
+    this.incremenetScore()
   }
 
   incremenetCounter = () => {
@@ -58,14 +55,19 @@ export default class QuizScreen extends React.Component {
       let _counter = prevState.counter < this.state.quiz.length - 1 ? prevState.counter + 1 : prevState.counter
       return {counter: _counter}
     })
+  }
 
+  showNext = () => {
+    this.setState({
+      showNext: true
+    })
   }
 
   incremenetScore = () => {
     this.setState(prevState =>{
       let _score = prevState.counter < this.state.quiz.length - 1 ? prevState.score + 1 : prevState.score
       return {score: _score}
-    })
+    }, this.showNext())
   }
 
   render() {
@@ -83,12 +85,12 @@ export default class QuizScreen extends React.Component {
               <View style = {styles.QuizContainer2}>
                 <View style={styles.InfoCardContainer}>
                   <Text style = {styles.ScoreBox}>
-                    {"Score " + this.state.score}
+                    {"Score" + "\n" + this.state.score}
                   </Text>
                 </View>
                 <View style={styles.QuizCardContainer3}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <View style={styles.InfoCardContainer2}>
+                    {/* <View style={styles.InfoCardContainer2}>
                       <View style={{flex: 1}}>
                         <Text style = {styles.CategoryBox}>
                           {this.state.category}
@@ -101,20 +103,34 @@ export default class QuizScreen extends React.Component {
                           {this.state.counter + 1 + " / " + this.state.quiz.length}
                         </Text>
                       </View>
-                    </View>
+                    </View> */}
                     <View style={styles.QuizCard}>
                       <Question
                         question = {this.state.quiz[this.state.counter].question}
                       />
                       <Options
-                        checkAnswer = {this.checkAnswer}
+                        updateState = {this.updateState}
                         correct = {this.state.quiz[this.state.counter].correct_answer} 
                         incorrect = {this.state.quiz[this.state.counter].incorrect_answers} 
                       />
                     </View>
                   </View>
                 </View>
-                <View style={{flex: 0.5}}>
+                <View style={{flex: 1}}>
+                  <Text style = {styles.CategoryBox}>
+                    {this.state.counter + 1 + " / " + this.state.quiz.length}
+                  </Text>
+                </View>
+                <View style={{flex: 1}}>
+                  {
+                    this.state.showNext ? (
+                      <TouchableOpacity  
+                        onPress={() => { this.incremenetCounter() }}>
+                            <Ionicons name="ios-arrow-dropright-circle" size={48} color="#FFFDE7" />
+                      </TouchableOpacity>
+                    ) : 
+                    null
+                  }
                 </View>
               </View>
             )
@@ -137,7 +153,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: '#FBC02D',
+    // backgroundColor: '#FBC02D',
     alignItems: 'center',
     // borderWidth: 1,
     // borderRadius: 5,
@@ -145,12 +161,12 @@ const styles = StyleSheet.create({
   },
   QuizCardContainer3: {
     // borderWidth: 1,
-    borderRadius: 10,
+    // borderRadius: 10,
     // borderColor: '#000',
     flex: 5,
     margin: 10,
     marginTop: 0,
-    backgroundColor: '#FFFDE7',
+    // backgroundColor: '#FFFDE7',
     flexDirection: 'row',
     color: '#444444'
   },
@@ -169,20 +185,20 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // borderRadius: 2,
     // borderColor: "#000",
-    // elevation: 1,
-    flex: 0.8,
+    elevation: 1,
+    flex: 1.3,
     flexDirection: 'row',
     width: 200,
-    margin: 10,
+    margin: 5,
     marginBottom: 5
   },
   Box: {
     textAlign:'center',
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: '#000',
+    // borderWidth: 1,
+    // borderRadius: 5,
+    // borderColor: '#000',
     padding: 5,
-    margin: 10,
+    margin: 5,
     flex: 1
   },
   ScoreBox: {
@@ -207,6 +223,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 });

@@ -2,22 +2,47 @@ import React from 'react';
 import { View, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { shuffle } from '../utils/Utils.js';
 import decode from '../utils/Unescape.js';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class Options extends React.Component {
+
+    initState = {
+        selectedAnswer: null,
+        refreshFlatList: false
+    }
 
     state = {
         correct: 'Loading 0...',
         incorrect: ['Loading 1 ...', 'Loading 2...', 'Loading 3...'],
-        options: []
+        options: [],
+        ...this.initState
     }
 
     componentDidMount() {
-        this.stateManagement()
+        this.setState({
+            ...this.initState
+        }, this.stateManagement())
+    }
+
+    checkAnswer = (event, answer) => {
+        console.log("1. checkAnswer")
+        console.log(answer)
+        console.log(this.state.correct)
+        console.log(this.state.selectedAnswer)
+        if (answer === this.state.correct) {
+            this.setState({
+                refreshFlatList: !this.state.refreshFlatList,
+                selectedAnswer: answer
+            }, this.props.updateState())
+        }
     }
 
     componentDidUpdate(prevProps){
+        console.log("componentDidUpdate")
         if (prevProps.correct !== this.props.correct) {
-            this.stateManagement()
+            this.setState({
+                ...this.initState
+            }, this.stateManagement())
         }
     }
 
@@ -31,7 +56,7 @@ export default class Options extends React.Component {
         _options = shuffle(_options)
         this.setState({
             correct: this.props.correct,
-            options:[..._options]
+            options:[..._options],
         })
     }
 
@@ -49,16 +74,25 @@ export default class Options extends React.Component {
                 (
                 <View>
                     <FlatList
+                        extraData={this.state.refreshFlatList}
                         data={this.state.options}
                         renderItem={({item}) => (
                             <View style={styles.OptionButton}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
+                                    disabled={this.state.selectedAnswer && item.key === this.state.correct}
                                     style={styles.Category} 
-                                    onPress={(event) => { this.props.checkAnswer(event, item.key, this.state.correct) }}>
+                                    onPress={(event) => { this.checkAnswer(event, item.key) }}>
                                         <View style={{alignItems: 'center'}}>
-                                            <Text>{decode(item.key)}</Text>
+                                            <Text style={{fontSize: 16}}>{decode(item.key)}</Text>
                                         </View>
                                 </TouchableOpacity>
+                                <View style={{position: 'absolute', height: 25, width: 25, right: 5, top: 10}}>
+                                    {
+                                        this.state.selectedAnswer === this.state.correct && item.key === this.state.correct ?
+                                            <Ionicons name="md-checkmark-circle-outline" size={25} color="#83B63E" /> : null
+                                    }
+                                </View>
+                                
                             </View>
                         )}
                     />
@@ -75,14 +109,16 @@ const styles = StyleSheet.create({
         flex: 6,
     },
     OptionButton: {
-        margin: 5
+        margin: 5,
+        // backgroundColor: '#FFFDE7',
     },
     Category: {
-        height: 40,
+        height: 45,
         margin: 2,
         justifyContent: 'center',
         borderRadius: 18,
         borderWidth: 2,
-        borderColor: '#FBC02D'
+        borderColor: '#FBC02D',
+        backgroundColor: '#FFFDE7',
     }  
 })
