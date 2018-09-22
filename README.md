@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 # Quiz screen 2
 
-<img src="https://github.com/adityamehra/react-native-quiz-app/blob/master/project%20screenshots/quiz_screen_updated.PNG" width="360" height="640" >
+<img src="https://github.com/adityamehra/react-native-quiz-app/blob/master/project%20screenshots/quiz_screen_updated.jpeg" width="360" height="640" >
 
 # Quiz screen correct
 
