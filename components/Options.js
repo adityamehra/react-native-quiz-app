@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 18,
         borderWidth: 2,
-        borderColor: '#FBC02D',
-        backgroundColor: '#FFFDE7',
+        borderColor: 'transparent',
+        backgroundColor: '#FFFDE7', /// #F1F8EA/
     }  
 })

@@ -16,11 +16,22 @@ export default class QuizScreen extends React.Component {
       books: 'https://opentdb.com/api.php?amount=30&category=10&difficulty=medium&type=multiple',
       animals: 'https://opentdb.com/api.php?amount=15&category=27&difficulty=medium&type=multiple',
       history: 'https://opentdb.com/api.php?amount=30&category=23&difficulty=medium&type=multiple',
-      television: 'https://opentdb.com/api.php?amount=30&category=14&difficulty=medium&type=multiple',
+      tv: 'https://opentdb.com/api.php?amount=30&category=14&difficulty=medium&type=multiple',
       geography: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple',
       music: 'https://opentdb.com/api.php?amount=30&category=12&difficulty=medium&type=multiple',
       art: 'https://opentdb.com/api.php?amount=30&category=22&difficulty=medium&type=multiple',
       mythology: 'https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple'
+    },
+    bgColors: {
+      sports: '#FBC02D',
+      books: '#785549',
+      animals: '#8CC152',
+      history: '#FBC02D',
+      tv: '#FBC02D',
+      geography: '#FBC02D',
+      music: '#FBC02D',
+      art: '#FBC02D',
+      mythology: '#FBC02D'
     },
     category: 'books',
     score: 0,
@@ -75,7 +86,7 @@ export default class QuizScreen extends React.Component {
 
   render() {
     return (
-      <View style = {styles.QuizContainer1}>
+      <View style = {[styles.QuizContainer1, {backgroundColor: this.state.bgColors[this.state.category]}]}>
         {
           this.state.quiz.length === 0 ? 
             (
@@ -146,7 +157,7 @@ export default class QuizScreen extends React.Component {
 const styles = StyleSheet.create({
   QuizContainer1: {
     flex: 1,
-    backgroundColor: '#FBC02D',
+    // backgroundColor: QuizScreen.state.bgColors.sports, //'#41C6E6', //'#FBC02D',
     // borderWidth: 1,
     // borderRadius: 5,
     // borderColor: '#000',
@@ -220,7 +231,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
     borderWidth: 2,
     borderRadius: 18,
-    borderColor: '#FBC02D',
+    borderColor: 'transparent',
     padding: 2,
     margin: 10,
     flex: 1,
